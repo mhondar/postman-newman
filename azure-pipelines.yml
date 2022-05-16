@@ -1,0 +1,36 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: npm install -g newman newman-reporter-htmlextra
+  displayName: 'Install Newman'
+
+- script: newman run ./APILogin/API_CROSSTECH_Login.postman_collection.json -e ./APILogin/API_CROSSTECH_Login.postman_environment.json  --reporters junit,cli,htmlextra --reporter-junit-export=./APILogin/JUnit/APITesting_qa-api-login.xml --reporter-htmlextra-title "Reporte API Testing SCM CrossTech Login" --reporter-htmlextra-export=./APILogin/HTML/APITesting_qa-api-login.html --delay-request 1000
+  displayName: 'Newman run'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed() 
+  inputs:
+    testResultsFiles: './APILogin/JUnit/APITesting_qa-api-login.xml'
+    testResultsFormat: 'JUnit'
+    testRunTitle: 'API Testing Report QA API Login'
+
+- task: UploadPostmanHtmlReport@1
+  condition: succeededOrFailed() 
+  displayName: 'Upload Postman Html Report'
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)/APILogin/HTML'
+    tabName: 'Postman Test'
+
+schedules:
+- cron: "0 10 * * *"
+  displayName: Daily Test Execution
+  branches:
+    include:
+    - main
+  always: true

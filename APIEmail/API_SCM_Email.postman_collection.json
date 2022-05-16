@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "9480e06c-daf6-41c7-90ee-95284304ed8b",
+		"name": "API_SCM_Email",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-50784 Generar test para validar Status Code 200 OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"if (pm.response.status==\"OK\") { ",
+							"    let jsonData = pm.response.json();",
+							"",
+							"    pm.test(\"TC-50903 Validar body request: property exitosa\", function () {",
+							"        pm.expect(jsonData).to.have.property(\"exitosa\").to.be.a(\"boolean\").to.eql(true);",
+							"    });",
+							"",
+							"    pm.test(\"TC-50904 Validar body request: property message\", function () {",
+							"        pm.expect(jsonData).to.have.property(\"message\").to.be.a(\"string\");",
+							"     });",
+							"",
+							"    pm.test(\"TC-50906 Validar body request: property message (Mensaje: Correo enviado)\", function () {",
+							"        pm.expect(jsonData).to.have.property(\"message\").to.equal(\"Correo enviado\");",
+							"     });",
+							"     ",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombreAplicacion\": \"General\",\r\n  \"templateId\": 0,\r\n  \"asunto\": \"Prueba Envio Email QA - POSTMAN - Nelson\",\r\n  \"de\": \"{{emailEmisor}}\",\r\n  \"nombreDe\": \"Nelson Lorca\",\r\n  \"body\": \"Email de Prueba Nelson <b>API EMAIL</b><br />desde POSTMAN.QA <b>Prueba QA</b> <br /><br />API QA automatización...\",\r\n  \"a\": {\r\n    \"marisleydi.hondar@iconstruye.com \": \"{{emailReceptor1}}\",\r\n    \"nelson.lorca@iconstruye.com\": \"{{emailReceptor2}}\"\r\n  },\r\n  \"conCopia\": {\r\n    \"kenny.saavedraiconstruye.com\": \"{{emailReceptor3}}\"\r\n  },\r\n  \"conCopiaOculta\": {\r\n    \"nelson.lorca@iconstruye.com\": \"{{emailReceptor2}}\"\r\n  },\r\n  \"llaves\": {\r\n    \"Id\": \"0\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://apiemailpp.iconstruye.cl/api/Email/EncolarEmail",
+					"protocol": "http",
+					"host": [
+						"apiemailpp",
+						"iconstruye",
+						"cl"
+					],
+					"path": [
+						"api",
+						"Email",
+						"EncolarEmail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Email - \"de\" vacio fail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-50907 Validar Status Code 400 con nodo De vacío\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombreAplicacion\": \"General\",\r\n  \"templateId\": 0,\r\n  \"asunto\": \"Prueba Envio Email QA - POSTMAN - Nelson\",\r\n  \"de\": \"\",\r\n  \"nombreDe\": \"Nelson Lorca\",\r\n  \"body\": \"Email de Prueba Nelson <b>API EMAIL</b><br />desde POSTMAN.QA <b>Prueba QA</b> <br /><br />API QA automatización...\",\r\n  \"a\": {\r\n    \"marisleydi.hondar@iconstruye.com \": \"{{emailReceptor1}}\",\r\n    \"nelson.lorca@iconstruye.com\": \"{{emailReceptor2}}\"\r\n  },\r\n  \"conCopia\": {\r\n    \"kenny.saavedraiconstruye.com\": \"{{emailReceptor3}}\"\r\n  },\r\n  \"conCopiaOculta\": {\r\n    \"nelson.lorca@iconstruye.com\": \"{{emailReceptor2}}\"\r\n  },\r\n  \"llaves\": {\r\n    \"Id\": \"0\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://apiemailpp.iconstruye.cl/api/Email/EncolarEmail",
+					"protocol": "http",
+					"host": [
+						"apiemailpp",
+						"iconstruye",
+						"cl"
+					],
+					"path": [
+						"api",
+						"Email",
+						"EncolarEmail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Email \"body\" vacio fail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-51356 Validar Status Code 400 con nodo body vacío\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombreAplicacion\": \"General\",\r\n  \"templateId\": 0,\r\n  \"asunto\": \"Prueba Envio Email QA - POSTMAN - Nelson\",\r\n  \"de\": \"{{emailEmisor}}\",\r\n  \"nombreDe\": \"Nelson Lorca\",\r\n  \"body\": \"\",\r\n  \"a\": {\r\n    \"marisleydi.hondar@iconstruye.com \": \"{{emailReceptor1}}\",\r\n    \"nelson.lorca@iconstruye.com\": \"{{emailReceptor2}}\"\r\n  },\r\n  \"conCopia\": {\r\n    \"kenny.saavedraiconstruye.com\": \"{{emailReceptor3}}\"\r\n  },\r\n  \"conCopiaOculta\": {\r\n    \"nelson.lorca@iconstruye.com\": \"{{emailReceptor2}}\"\r\n  },\r\n  \"llaves\": {\r\n    \"Id\": \"0\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://apiemailpp.iconstruye.cl/api/Email/EncolarEmail",
+					"protocol": "http",
+					"host": [
+						"apiemailpp",
+						"iconstruye",
+						"cl"
+					],
+					"path": [
+						"api",
+						"Email",
+						"EncolarEmail"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var url = pm.environment.get(\"url\");",
+					"var client = pm.environment.get(\"clientId\");",
+					"var secret = pm.environment.get(\"secretId\");",
+					"",
+					"pm.sendRequest({",
+					"    url: url,",
+					"    method: 'POST',",
+					"    headers: {",
+					"        'Accept': 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded'",
+					"    },",
+					"    body: {",
+					"        mode: 'urlencoded',",
+					"        urlencoded: [",
+					"            {key: \"grant_type\", value: \"client_credentials\", disabled: false},",
+					"            {key: \"client_id\", value: client, disabled: false},",
+					"            {key: \"client_secret\", value: secret, disabled: false}",
+					"        ]",
+					"    }",
+					"}, function (err, res) {",
+					"    if (res.json().access_token !== \"\") {",
+					"        pm.environment.set(\"accessToken\", res.json().access_token);",
+					"    } else {",
+					"        console.log(err);",
+					"    }",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

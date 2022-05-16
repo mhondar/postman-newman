@@ -1,0 +1,507 @@
+{
+	"info": {
+		"_postman_id": "89c764c4-7a23-4138-8057-b3a753ed2878",
+		"name": "API_SCM_Comprador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ceremonia",
+			"item": [
+				{
+					"name": "1 - DatosFirma",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50926 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if (pm.response.status == \"OK\") {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.test(\"TC-50927 Validar que Titulo sea consistente al del body request\", function () {",
+									"        pm.expect(jsonData.Titulo).to.eql(pm.environment.get(\"C1_Titulo\"));",
+									"    });",
+									"",
+									"    pm.test(\"TC-50929 Validar que Archivo.NameFile sea consistente al del body request\", function () {",
+									"        pm.expect(jsonData.Archivo.NameFile).to.eql(pm.environment.get(\"C1_ArchivoNameFile\"));",
+									"    });",
+									"",
+									"    pm.test('TC-50930 Validar que en Archivo.FileBase64 contenga un un string', () => {",
+									"        pm.expect(jsonData.Archivo.FileBase64).to.be.a('string');",
+									"    });",
+									"",
+									"    pm.test(\"TC-50931 Validar que Archivo.Numberofpages sea consistente al del body request\", function () {",
+									"        pm.expect(jsonData.Archivo.NumberOfPages).to.eql(parseInt(pm.environment.get(\"C1_NumberOfPages\")));",
+									"    });",
+									"",
+									"    pm.test(\"TC-50932 Validar que el CodigoEmpresa sea correcto\", function () {",
+									"        pm.expect(jsonData.CodigoEmpresa).to.eql(pm.environment.get(\"C1_CodigoEmpresa\"));",
+									"    });",
+									"",
+									"    pm.test(\"TC-50933 Validar que el TipoDocumentoId sea correcto\", function () {",
+									"        pm.expect(jsonData.TipoDocumentoId).to.eql(parseInt(pm.environment.get(\"C1_TipoDocumentoId\")));",
+									"    });",
+									"    ",
+									"    pm.test(\"TC-50934 Validar que en SistemaOrigenId sea  0 o 1\", function () {",
+									"        pm.expect(jsonData.SistemaOrigenId).to.be.oneOf([0,1]); ",
+									"    });",
+									"",
+									"    pm.test(\"TC-50935 Validar que ProveedorId sea consistente al del body request \", function () {",
+									"        pm.expect(jsonData.ProveedorId).to.eql(parseInt(pm.environment.get(\"C1_ProveedorId\")));",
+									"    });",
+									"",
+									"",
+									"    pm.test(\"TC-53582 Validar que Actores sea consistente al del body request (ActoresEmisorNombre))\", function () {",
+									"        pm.expect(jsonData.Actores[0].Nombre).to.eql(pm.environment.get(\"C1_ActoresEmisorNombre\"));",
+									"    });",
+									"",
+									"    pm.test(\"TC-53583 Validar que Actores sea consistente al del body request (ActoresEmisorEmail))\", function () {",
+									"        pm.expect(jsonData.Actores[0].Email).to.eql(pm.environment.get(\"C1_ActoresEmisorEmail\"));",
+									"    });",
+									"    pm.test(\"TC-53584 Validar que Actores sea consistente al del body request (ActoresEmisorId))\", function () {",
+									"        pm.expect(jsonData.Actores[0].NationalIdentificationNumber).to.eql(pm.environment.get(\"C1_ActoresEmisorId\"));",
+									"    });",
+									"",
+									"    pm.test(\"TC-53585 Validar que Actores sea consistente al del body request (ActoresTipoActorEmisor)\", function () {",
+									"        pm.expect(jsonData.Actores[0].TipoActor).to.eql(pm.environment.get(\"C1_ActoresTipoActorEmisor\"));",
+									"    });",
+									"",
+									"",
+									"    pm.test(\"TC-53586 Validar que Actores sea consistente al del body request (ActoresReceptorNombre))\", function () {",
+									"        pm.expect(jsonData.Actores[1].Nombre).to.eql(pm.environment.get(\"C1_ActoresReceptorNombre\"));",
+									"    });",
+									"",
+									"    pm.test(\"TC-53587 Validar que Actores sea consistente al del body request ((ActoresReceptorEmail))\", function () {",
+									"        pm.expect(jsonData.Actores[1].Email).to.eql(pm.environment.get(\"C1_ActoresReceptorEmail\"));",
+									"    });",
+									"",
+									"",
+									"    pm.test(\"TC-53588 Validar que Actores sea consistente al del body request ((ActoresReceptorId))\", function () {",
+									"        pm.expect(jsonData.Actores[1].NationalIdentificationNumber).to.eql(pm.environment.get(\"C1_ActoresReceptorId\"));",
+									"    });",
+									"",
+									"    pm.test(\"TC-53589 Validar que Actores sea consistente al del body request ((ActoresReceptorTipoActor))\", function () {",
+									"        pm.expect(jsonData.Actores[1].TipoActor).to.eql(pm.environment.get(\"C1_ActoresReceptorTipoActor\"));",
+									"    });",
+									"    ",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "IdSuscripcion",
+								"value": "Gx8==",
+								"type": "text"
+							},
+							{
+								"key": "IdPortal",
+								"value": "Gx8==",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Titulo\": \"{{C1_Titulo}}\",\r\n  \"Actores\": [\r\n    {\r\n      \"Nombre\": \"{{C1_ActoresEmisorNombre}}\",\r\n      \"Email\": \"{{C1_ActoresEmisorEmail}}\",\r\n      \"NationalIdentificationNumber\": \"{{C1_ActoresEmisorId}}\",\r\n      \"TipoActor\": \"{{C1_ActoresTipoActorEmisor}}\"\r\n    },\r\n     {\r\n      \"Nombre\": \"{{C1_ActoresReceptorNombre}}\",\r\n      \"Email\": \"{{C1_ActoresReceptorEmail}}\",\r\n      \"NationalIdentificationNumber\": \"{{C1_ActoresReceptorId}}\",\r\n      \"TipoActor\": \"{{C1_ActoresReceptorTipoActor}}\"\r\n    }\r\n  ],\r\n  \"Archivo\": {\r\n    \"NameFile\": \"{{C1_ArchivoNameFile}}\",\r\n    \"GuidDocumento\": \"\",\r\n    \"NumberOfPages\": {{C1_NumberOfPages}}\r\n  },\r\n  \"CeremoniaId\": 228,\r\n  \"AttachId\": 0,\r\n  \"ProveedorId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apimarketplace-des.iconstruye.cl:10443/api/Ceremonia/DatosFirma",
+							"protocol": "https",
+							"host": [
+								"apimarketplace-des",
+								"iconstruye",
+								"cl"
+							],
+							"port": "10443",
+							"path": [
+								"api",
+								"Ceremonia",
+								"DatosFirma"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sistema",
+			"item": [
+				{
+					"name": "TasaCambio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50956 Validar Status Code 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.status == \"OK\") {\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.test('TC-54969 Validar que devuelva un valor en el body request parametros correctos', () => {\r",
+									"        pm.expect(jsonData).to.be.a('number');\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "IdSuscripcion",
+								"value": "Gx8==",
+								"type": "text"
+							},
+							{
+								"key": "IdPortal",
+								"value": "Gx8==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://apimarketplace-des.iconstruye.cl:10443/api/Sistema/TasaCambio?monedaOrigen=USD&monedaDestino=CLP",
+							"protocol": "https",
+							"host": [
+								"apimarketplace-des",
+								"iconstruye",
+								"cl"
+							],
+							"port": "10443",
+							"path": [
+								"api",
+								"Sistema",
+								"TasaCambio"
+							],
+							"query": [
+								{
+									"key": "monedaOrigen",
+									"value": "USD"
+								},
+								{
+									"key": "monedaDestino",
+									"value": "CLP"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TasaCambio Fail monedaOrigen vacio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-55970 Validar status code 200 OK enviando origen Vacío\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"if (pm.response.status == \"OK\") {\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.test('TC-54049 Validar que devuelva un valor 0.0000 al enviar Origen vacío', () => {\r",
+									"        pm.expect(jsonData).to.eql(0.0000);\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "IdSuscripcion",
+								"value": "Gx8==",
+								"type": "text"
+							},
+							{
+								"key": "IdPortal",
+								"value": "Gx8==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://apimarketplace-des.iconstruye.cl:10443/api/Sistema/TasaCambio?monedaOrigen=&monedaDestino=CLF",
+							"protocol": "https",
+							"host": [
+								"apimarketplace-des",
+								"iconstruye",
+								"cl"
+							],
+							"port": "10443",
+							"path": [
+								"api",
+								"Sistema",
+								"TasaCambio"
+							],
+							"query": [
+								{
+									"key": "monedaOrigen",
+									"value": ""
+								},
+								{
+									"key": "monedaDestino",
+									"value": "CLF"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TasaCambio Fail monedaDestino vacio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-55971 Validar status code 200 OK al enviar valor Destino vacío\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.status == \"OK\") {\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.test('TC-55972 Validar que devuelva un valor 0.0000 al enviar Destino vacío', () => {\r",
+									"        pm.expect(jsonData).to.eql(1.0000);\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "IdSuscripcion",
+								"value": "Gx8==",
+								"type": "text"
+							},
+							{
+								"key": "IdPortal",
+								"value": "Gx8==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://apimarketplace-des.iconstruye.cl:10443/api/Sistema/TasaCambio?monedaOrigen=CLP&monedaDestino=",
+							"protocol": "https",
+							"host": [
+								"apimarketplace-des",
+								"iconstruye",
+								"cl"
+							],
+							"port": "10443",
+							"path": [
+								"api",
+								"Sistema",
+								"TasaCambio"
+							],
+							"query": [
+								{
+									"key": "monedaOrigen",
+									"value": "CLP"
+								},
+								{
+									"key": "monedaDestino",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TasaCambio Fail monedaDestino vacio Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-55973 Validar status code 200 mandando origen moneda Destino vacío\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.status == \"OK\") {\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.test('TC-55074 Validar que devuelva un valor 0.0000 al enviar Origen y Destino vacío', () => {\r",
+									"        pm.expect(jsonData).to.eql(0.0000);\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "IdSuscripcion",
+								"value": "Gx8==",
+								"type": "text"
+							},
+							{
+								"key": "IdPortal",
+								"value": "Gx8==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://apimarketplace-des.iconstruye.cl:10443/api/Sistema/TasaCambio?monedaOrigen=&monedaDestino=",
+							"protocol": "https",
+							"host": [
+								"apimarketplace-des",
+								"iconstruye",
+								"cl"
+							],
+							"port": "10443",
+							"path": [
+								"api",
+								"Sistema",
+								"TasaCambio"
+							],
+							"query": [
+								{
+									"key": "monedaOrigen",
+									"value": ""
+								},
+								{
+									"key": "monedaDestino",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var url = pm.environment.get(\"url\");",
+					"var client = pm.environment.get(\"clientId\");",
+					"var secret = pm.environment.get(\"secretId\");",
+					"",
+					"pm.sendRequest({",
+					"    url: url,",
+					"    method: 'POST',",
+					"    headers: {",
+					"        'Accept': 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded'",
+					"    },",
+					"    body: {",
+					"        mode: 'urlencoded',",
+					"        urlencoded: [",
+					"            {key: \"grant_type\", value: \"client_credentials\", disabled: false},",
+					"            {key: \"client_id\", value: client, disabled: false},",
+					"            {key: \"client_secret\", value: secret, disabled: false}",
+					"        ]",
+					"    }",
+					"}, function (err, res) {",
+					"    if (res.json().access_token !== \"\") {",
+					"        pm.environment.set(\"accessToken\", res.json().access_token);",
+					"    } else {",
+					"        console.log(err);",
+					"    }",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

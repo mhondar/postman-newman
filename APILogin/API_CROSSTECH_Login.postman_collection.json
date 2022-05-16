@@ -1,0 +1,1531 @@
+{
+	"info": {
+		"_postman_id": "c1789a07-e997-431c-a42e-40729673b653",
+		"name": "API_CROSSTECH_Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api/v{version}",
+			"item": [
+				{
+					"name": "Autenticacion",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50401 Validar Status code 200 OK\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"if (pm.response.status == \"OK\") {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.test('TC-50633 Validar que el nodo returnUrl contenga un string', () => {\r",
+											"        pm.expect(jsonData.returnUrl).to.be.a('string');\r",
+											"    });\r",
+											"\r",
+											"}\r",
+											"\r",
+											"pm.environment.set(\"accessToken\", jsonData.accessToken);\r",
+											"pm.environment.set(\"refreshToken\", jsonData.refreshToken);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/Login?email={{emailLogin}}&password={{passwordLogin}}&idAplicacion={{idAplicacionLogin}}&filtroAdicional=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"Login"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "{{emailLogin}}"
+										},
+										{
+											"key": "password",
+											"value": "{{passwordLogin}}"
+										},
+										{
+											"key": "idAplicacion",
+											"value": "{{idAplicacionLogin}}"
+										},
+										{
+											"key": "filtroAdicional",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/Login?email=<string>&password=<string>&idAplicacion=<string>&filtroAdicional=",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"Login"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "<string>"
+												},
+												{
+													"key": "password",
+													"value": "<string>"
+												},
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": ""
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Login Fail Password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50401 Validar Status code 401 Unauthorized\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/Login?email={{emailLogin}}&password={{passwordFail}}&idAplicacion={{idAplicacionLogin}}&filtroAdicional=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"Login"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "{{emailLogin}}"
+										},
+										{
+											"key": "password",
+											"value": "{{passwordFail}}"
+										},
+										{
+											"key": "idAplicacion",
+											"value": "{{idAplicacionLogin}}"
+										},
+										{
+											"key": "filtroAdicional",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/Login?email=<string>&password=<string>&idAplicacion=<string>&filtroAdicional=",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"Login"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "<string>"
+												},
+												{
+													"key": "password",
+													"value": "<string>"
+												},
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": ""
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Login Fail Email",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-53701 Validar Status code 404 Not Found\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"if(pm.response.status == \"Not Found\") {\r",
+											"    let jsonData = pm.response.json();\r",
+											"    pm.test(\"TC-62229 Validar Mensaje usuario o clave incorrecta en el Body Response\", function () {\r",
+											"        pm.expect(jsonData).to.eql('Usuario o clave incorrecta');\r",
+											"    });\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/Login?email={{emailFail}}&password={{passwordLogin}}&idAplicacion={{idAplicacionLogin}}&filtroAdicional=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"Login"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "{{emailFail}}"
+										},
+										{
+											"key": "password",
+											"value": "{{passwordLogin}}"
+										},
+										{
+											"key": "idAplicacion",
+											"value": "{{idAplicacionLogin}}"
+										},
+										{
+											"key": "filtroAdicional",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/Login?email=<string>&password=<string>&idAplicacion=<string>&filtroAdicional=",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"Login"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "<string>"
+												},
+												{
+													"key": "password",
+													"value": "<string>"
+												},
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": ""
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GetToken",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50400 Validar Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/GetToken?email={{emailLogin}}&password={{passwordLogin}}&idAplicacion={{idAplicacionLogin}}&filtroAdicional=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"GetToken"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "{{emailLogin}}"
+										},
+										{
+											"key": "password",
+											"value": "{{passwordLogin}}"
+										},
+										{
+											"key": "idAplicacion",
+											"value": "{{idAplicacionLogin}}"
+										},
+										{
+											"key": "filtroAdicional",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/GetToken?email=<string>&password=<string>&idAplicacion=<string>&filtroAdicional=",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"GetToken"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "<string>"
+												},
+												{
+													"key": "password",
+													"value": "<string>"
+												},
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": ""
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GetToken Fail Email",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50400 Validar Status code is 401 Unauthorized\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/GetToken?email={{emailFail}}&password={{passwordLogin}}&idAplicacion={{idAplicacionLogin}}&filtroAdicional=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"GetToken"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "{{emailFail}}"
+										},
+										{
+											"key": "password",
+											"value": "{{passwordLogin}}"
+										},
+										{
+											"key": "idAplicacion",
+											"value": "{{idAplicacionLogin}}"
+										},
+										{
+											"key": "filtroAdicional",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/GetToken?email=<string>&password=<string>&idAplicacion=<string>&filtroAdicional=",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"GetToken"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "<string>"
+												},
+												{
+													"key": "password",
+													"value": "<string>"
+												},
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": ""
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GetToken Fail Password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50400 Validar Status code is 401 Unauthorized\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/GetToken?email={{emailLogin}}&password={{passwordFail}}&idAplicacion={{idAplicacionLogin}}&filtroAdicional=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"GetToken"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "{{emailLogin}}"
+										},
+										{
+											"key": "password",
+											"value": "{{passwordFail}}"
+										},
+										{
+											"key": "idAplicacion",
+											"value": "{{idAplicacionLogin}}"
+										},
+										{
+											"key": "filtroAdicional",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/GetToken?email=<string>&password=<string>&idAplicacion=<string>&filtroAdicional=",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"GetToken"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "<string>"
+												},
+												{
+													"key": "password",
+													"value": "<string>"
+												},
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": ""
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "RefrescarToken",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50399 Validar Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/RefrescarToken?token={{refreshToken}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"RefrescarToken"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{refreshToken}}"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/RefrescarToken?token=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"RefrescarToken"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "RefrescarToken Fail",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50399 Validar Status code is 401 Unauthorized\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/RefrescarToken?token={{accessToken}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"RefrescarToken"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/RefrescarToken?token=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"RefrescarToken"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "AutenticarNuevoProducto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50398 Validar Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/AutenticarNuevoProducto?idAplicacion={{idAplicacionLogin}}&filtroAdicional=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"AutenticarNuevoProducto"
+									],
+									"query": [
+										{
+											"key": "idAplicacion",
+											"value": "{{idAplicacionLogin}}"
+										},
+										{
+											"key": "filtroAdicional",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/AutenticarNuevoProducto?idAplicacion=<string>&filtroAdicional=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"AutenticarNuevoProducto"
+											],
+											"query": [
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/AutenticarNuevoProducto?idAplicacion=<string>&filtroAdicional=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"AutenticarNuevoProducto"
+											],
+											"query": [
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/AutenticarNuevoProducto?idAplicacion=<string>&filtroAdicional=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"AutenticarNuevoProducto"
+											],
+											"query": [
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "AutenticarNuevoProducto FailBearerToken",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50398 Validar Status code is 401 Unauthorized\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{refreshToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/AutenticarNuevoProducto?idAplicacion={{idAplicacionLogin}}&filtroAdicional=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"AutenticarNuevoProducto"
+									],
+									"query": [
+										{
+											"key": "idAplicacion",
+											"value": "{{idAplicacionLogin}}"
+										},
+										{
+											"key": "filtroAdicional",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/AutenticarNuevoProducto?idAplicacion=<string>&filtroAdicional=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"AutenticarNuevoProducto"
+											],
+											"query": [
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/AutenticarNuevoProducto?idAplicacion=<string>&filtroAdicional=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"AutenticarNuevoProducto"
+											],
+											"query": [
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/AutenticarNuevoProducto?idAplicacion=<string>&filtroAdicional=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"AutenticarNuevoProducto"
+											],
+											"query": [
+												{
+													"key": "idAplicacion",
+													"value": "<string>"
+												},
+												{
+													"key": "filtroAdicional",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "CerrrarSession",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50396 Validar Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/CerrrarSession?token=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Autenticacion",
+										"CerrrarSession"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Autenticacion/CerrrarSession?token=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Autenticacion",
+												"CerrrarSession"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Usuario",
+					"item": [
+						{
+							"name": "Usuario",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50388 Validar Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"if (pm.response.status == \"OK\") {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.test(\"TC-50946 Validar que el email del body corresponda con el del Login\", function () {\r",
+											"        pm.expect(jsonData.email).to.eql(pm.environment.get(\"emailLogin\"));\r",
+											"});\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Usuario",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Usuario"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Usuario",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Usuario"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Usuario",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Usuario"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Usuario",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Usuario"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Usuario FailToken",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"TC-50388 Validar Status code is 401 Unauthorized\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{refreshToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v{{version}}/Usuario",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v{{version}}",
+										"Usuario"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Usuario",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Usuario"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Usuario",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Usuario"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v{{version}}/Usuario",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v{{version}}",
+												"Usuario"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://prod-api-login.azurewebsites.net/"
+		},
+		{
+			"key": "version",
+			"value": "1"
+		}
+	]
+}

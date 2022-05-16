@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "fd93d0cd-57fa-4101-9780-af56af62c0e0",
+		"name": "ESVDATASET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "actual-ESV",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56731 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.environment.set(\"KeyResponse\", keys[0]);\r",
+							"}\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <!--Optional:-->\r\n         <pit:cliente>{{cliente}}</pit:cliente>\r\n         <!--Optional:-->\r\n         <pit:password>{{password}}</pit:password>\r\n         <!--Optional:-->\r\n         <pit:data>{{pitData}}</pit:data>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://esb.iconstruye.cl/DTE/Iconstruye.PI.EndPoint.Trusted.Integraciones.svc",
+					"protocol": "https",
+					"host": [
+						"esb",
+						"iconstruye",
+						"cl"
+					],
+					"path": [
+						"DTE",
+						"Iconstruye.PI.EndPoint.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "nuevo-ESV",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56855 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.test(\"TC-56857 Validar Property siguiente a ProcesarResult sea la misma del anterior\", function () {\r",
+							"        pm.expect(pm.environment.get(\"KeyResponse\")).to.eql(keys[0]);\r",
+							"    });\r",
+							"\r",
+							"    \r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <!--Optional:-->\r\n         <pit:cliente>{{cliente}}</pit:cliente>\r\n         <!--Optional:-->\r\n         <pit:password>{{password}}</pit:password>\r\n         <!--Optional:-->\r\n         <pit:data>{{pitData}}</pit:data>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.0.234:9040/Iconstruye.PI.EndPoint.Trusted.Integraciones.svc",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"234"
+					],
+					"port": "9040",
+					"path": [
+						"Iconstruye.PI.EndPoint.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

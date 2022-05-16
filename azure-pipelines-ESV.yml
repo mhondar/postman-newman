@@ -1,0 +1,35 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: npm install -g newman newman-reporter-htmlextra
+  displayName: 'Install Newman'
+
+- script: newman run ./APIESV/ESVDATASET.postman_collection.json -e ./APIESV/ESV.postman_environment.json  -d ./APIESV/dataSEtEsv.json --reporters junit,cli,htmlextra --reporter-junit-export=./APIESV/JUnit/APITesting_qa-api-esv.xml --reporter-htmlextra-title "Reporte API Testing ESV" --reporter-htmlextra-export=./APIESV/HTML/APITesting_qa-api-esv.html --delay-request 1000
+  displayName: 'Newman run'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed() 
+  inputs:
+    testResultsFiles: './APIESV/JUnit/APITesting_qa-api-esv.xml'
+    testResultsFormat: 'JUnit'
+    testRunTitle: 'API Testing Report QA API ESV'
+
+- task: UploadPostmanHtmlReport@1
+  condition: succeededOrFailed() 
+  displayName: 'Upload Postman Html Report'
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)/APIESV/HTML'
+    tabName: 'Postman Test'
+
+schedules:
+- cron: "0 0 * * *"
+  displayName: Daily midnight Test Execution
+  branches:
+    include:
+    - main

@@ -1,0 +1,469 @@
+{
+	"info": {
+		"_postman_id": "f523b402-7e9d-4ff9-adad-1b3d654f9580",
+		"name": "ESB-Json-Antiguo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AntiguoProcesarAceptacionReciboMercaderias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56731 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.environment.set(\"KeyResponse\", keys[0]);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <!--Optional:-->\r\n         <pit:cliente>syf</pit:cliente>\r\n         <!--Optional:-->\r\n         <pit:password>syf</pit:password>\r\n         <!--Optional:-->\r\n         <pit:codigoMetodo>http://dteservice.iconstruye.cl/#AceptacionReciboMercaderias</pit:codigoMetodo>\r\n         <!--Optional:-->\r\n         <pit:dataJson> {\"ACEPTACIONRECIBOMERCADERIAS\":\r\n         {\"TIPODTE\":33,\r\n   \"FOLIODTE\": 423000762,\r\n    \"RUTEMISOR\": 76499136,\r\n    \"RUTRECEPTOR\": 91502000,\r\n    \"RECINTO\": \"BRISA MARINAII\",\r\n    \"INCLUYEXMLRESPUESTA\": false\r\n    }\r\n    }</pit:dataJson>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://svr-biztqa12.iconstruye.com:9017/Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc",
+					"protocol": "http",
+					"host": [
+						"svr-biztqa12",
+						"iconstruye",
+						"com"
+					],
+					"port": "9017",
+					"path": [
+						"Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NuevoProcesarAceptacionReciboMercaderias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56731 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.environment.set(\"KeyResponse\", keys[0]);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <!--Optional:-->\r\n         <pit:cliente>syf</pit:cliente>\r\n         <!--Optional:-->\r\n         <pit:password>syf</pit:password>\r\n         <!--Optional:-->\r\n         <pit:codigoMetodo>http://dteservice.iconstruye.cl/#AceptacionReciboMercaderias</pit:codigoMetodo>\r\n         <!--Optional:-->\r\n         <pit:dataJson> {\"ACEPTACIONRECIBOMERCADERIAS\":\r\n         {\"TIPODTE\":33,\r\n   \"FOLIODTE\": 423000762,\r\n    \"RUTEMISOR\": 76499136,\r\n    \"RUTRECEPTOR\": 91502000,\r\n    \"RECINTO\": \"BRISA MARINAII\",\r\n    \"INCLUYEXMLRESPUESTA\": false\r\n    }\r\n    }</pit:dataJson>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://192.168.0.234:9017/Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"234"
+					],
+					"port": "9017",
+					"path": [
+						"Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AntiguoProcesarACEPTACIONRECIBOMERCADERIAS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56731 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.environment.set(\"KeyResponse\", keys[0]);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <pit:cliente>syf</pit:cliente>\r\n         <pit:password>syf</pit:password>\r\n         <pit:codigoMetodo>http://dteservice.iconstruye.cl/#AceptacionReclamoReciboMercaderias</pit:codigoMetodo>\r\n         <pit:dataJson>\r\n         {\"ACEPTACIONRECIBOMERCADERIAS\":\r\n         {\"TIPODTE\":33,\r\n    \"FOLIODTE\": 423000762,\r\n    \"RUTEMISOR\": 76499136,\r\n    \"RUTRECEPTOR\": 91502000,\r\n    \"RECINTO\": \"BRISA MARINAII\",\r\n    \"INCLUYEXMLRESPUESTA\": false\r\n    }\r\n    }\r\n</pit:dataJson>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://svr-biztqa12.iconstruye.com:9017/Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc",
+					"protocol": "http",
+					"host": [
+						"svr-biztqa12",
+						"iconstruye",
+						"com"
+					],
+					"port": "9017",
+					"path": [
+						"Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NuevoProcesarACEPTACIONRECIBOMERCADERIAS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56731 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.environment.set(\"KeyResponse\", keys[0]);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <pit:cliente>syf</pit:cliente>\r\n         <pit:password>syf</pit:password>\r\n         <pit:codigoMetodo>http://dteservice.iconstruye.cl/#AceptacionReclamoReciboMercaderias</pit:codigoMetodo>\r\n         <pit:dataJson>\r\n         {\"ACEPTACIONRECIBOMERCADERIAS\":\r\n         {\"TIPODTE\":33,\r\n    \"FOLIODTE\": 423000762,\r\n    \"RUTEMISOR\": 76499136,\r\n    \"RUTRECEPTOR\": 91502000,\r\n    \"RECINTO\": \"BRISA MARINAII\",\r\n    \"INCLUYEXMLRESPUESTA\": false\r\n    }\r\n    }\r\n</pit:dataJson>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://192.168.0.234:9017/Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"234"
+					],
+					"port": "9017",
+					"path": [
+						"Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AntiguoProcesarACEPTARORECHAZARDTE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56731 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.environment.set(\"KeyResponse\", keys[0]);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n<soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <pit:cliente>SYF</pit:cliente>\r\n         <pit:password>SYF</pit:password>\r\n         <pit:codigoMetodo>http://dteservice.iconstruye.cl/#AceptaroRechazarDTE</pit:codigoMetodo>\r\n         <pit:dataJson>        \r\n       {\r\n  \"ACEPTARORECHAZARDTE\": {\r\n   \"TIPODTE\": 33,\r\n   \"FOLIODTE\": 423000762,\r\n    \"RUTEMISOR\": 76499136,\r\n    \"RUTRECEPTOR\": 91502000,\r\n    \"RESPUESTA\": \"DTE_Aceptado_OK\",\r\n    \"COMENTARIOSRESPUESTA\":\"DTE Aceptado\" ,\r\n    \"INCLUYEXMLRESPUESTA\": false\r\n  }\r\n         }</pit:dataJson>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n\r\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://svr-biztqa12.iconstruye.com:9017/Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc",
+					"protocol": "http",
+					"host": [
+						"svr-biztqa12",
+						"iconstruye",
+						"com"
+					],
+					"port": "9017",
+					"path": [
+						"Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NuevoProcesarACEPTARORECHAZARDTE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56731 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.environment.set(\"KeyResponse\", keys[0]);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n<soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <pit:cliente>SYF</pit:cliente>\r\n         <pit:password>SYF</pit:password>\r\n         <pit:codigoMetodo>http://dteservice.iconstruye.cl/#AceptaroRechazarDTE</pit:codigoMetodo>\r\n         <pit:dataJson>        \r\n       {\r\n  \"ACEPTARORECHAZARDTE\": {\r\n   \"TIPODTE\": 33,\r\n   \"FOLIODTE\": 423000762,\r\n    \"RUTEMISOR\": 76499136,\r\n    \"RUTRECEPTOR\": 91502000,\r\n    \"RESPUESTA\": \"DTE_Aceptado_OK\",\r\n    \"COMENTARIOSRESPUESTA\":\"DTE Aceptado\" ,\r\n    \"INCLUYEXMLRESPUESTA\": false\r\n  }\r\n         }</pit:dataJson>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n\r\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://192.168.0.234:9017/Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"234"
+					],
+					"port": "9017",
+					"path": [
+						"Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AntiguoProcesarACEPTARORECHAZARRECLAMODTE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56731 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.environment.set(\"KeyResponse\", keys[0]);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <pit:cliente>SYF</pit:cliente>\r\n         <pit:password>SYF</pit:password>\r\n         <pit:codigoMetodo>http://dteservice.iconstruye.cl/#AceptaroRechazarReclamoDTE</pit:codigoMetodo>\r\n         <pit:dataJson>\r\n          {\r\n  \"ACEPTARORECHAZARRECLAMODTE\": {\r\n    \"TIPODTE\": 33,\r\n    \"FOLIODTE\": 423000762,\r\n    \"RUTEMISOR\": 76499136,\r\n    \"RUTRECEPTOR\": 91502000,\r\n    \"RESPUESTA\": \"DTE_Aceptado_OK\",\r\n    \"COMENTARIOSRESPUESTA\":\"DTE Aceptado\" ,\r\n    \"INCLUYEXMLRESPUESTA\": false,\r\n    \"TIPORECLAMO\": \"AceptaDocumento\"\r\n  }\r\n}</pit:dataJson>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n\r\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://svr-biztqa12.iconstruye.com:9017/Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc",
+					"protocol": "http",
+					"host": [
+						"svr-biztqa12",
+						"iconstruye",
+						"com"
+					],
+					"port": "9017",
+					"path": [
+						"Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NuevoProcesarACEPTARORECHAZARRECLAMODTE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"TC-56731 Validar Status code 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"if (pm.response.status == \"OK\") {\r",
+							"    var jsonObject = xml2Json(responseBody);\r",
+							"    pm.environment.set(\"bodyResponse\", responseBody);\r",
+							"    let objectJson = jsonObject['s:Envelope']['s:Body'].ProcesarResponse.ProcesarResult\r",
+							"    let keys = Object.keys(objectJson);\r",
+							"    console.log(keys[0])\r",
+							"    pm.environment.set(\"KeyResponse\", keys[0]);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "http://PITrusted.iconstruye.cl/IIntegraciones/Procesar",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:pit=\"http://PITrusted.iconstruye.cl/\">\r\n\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <pit:Procesar>\r\n         <pit:cliente>SYF</pit:cliente>\r\n         <pit:password>SYF</pit:password>\r\n         <pit:codigoMetodo>http://dteservice.iconstruye.cl/#AceptaroRechazarReclamoDTE</pit:codigoMetodo>\r\n         <pit:dataJson>\r\n          {\r\n  \"ACEPTARORECHAZARRECLAMODTE\": {\r\n    \"TIPODTE\": 33,\r\n    \"FOLIODTE\": 423000762,\r\n    \"RUTEMISOR\": 76499136,\r\n    \"RUTRECEPTOR\": 91502000,\r\n    \"RESPUESTA\": \"DTE_Aceptado_OK\",\r\n    \"COMENTARIOSRESPUESTA\":\"DTE Aceptado\" ,\r\n    \"INCLUYEXMLRESPUESTA\": false,\r\n    \"TIPORECLAMO\": \"AceptaDocumento\"\r\n  }\r\n}</pit:dataJson>\r\n      </pit:Procesar>\r\n   </soapenv:Body>\r\n\r\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://192.168.0.234:9017/Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"234"
+					],
+					"port": "9017",
+					"path": [
+						"Iconstruye.PI.EndPoint.Json.Trusted.Integraciones.svc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

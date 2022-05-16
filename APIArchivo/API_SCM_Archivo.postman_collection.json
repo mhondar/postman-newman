@@ -1,0 +1,755 @@
+{
+	"info": {
+		"_postman_id": "bb0856e8-f9fc-4997-b4db-8c5e42a77ed7",
+		"name": "API_SCM_Archivo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "Put - Guardar en Files \"OJO SON ARCHIVOS PRIVADOS\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// capturar location del response headers y guardar en variable de ambiente location",
+									"",
+									"",
+									"pm.test(\"TC-50859 Validar Status Code 202 Accepted\", function () {",
+									"    pm.response.to.have.status(202);",
+									"});",
+									"",
+									"if(pm.response.status == \"Accepted\") {",
+									"    pm.test(\"TC-50860 Validar que el header contenga el Location\", function () {",
+									"        pm.response.to.have.header(\"Location\");",
+									"        pm.environment.set(\"locationPNG\", pm.response.headers.get(\"Location\"));",
+									"    });",
+									"}",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "./APIArchivo/pikachu.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Files/68?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Files",
+								"68"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - Obtener Archivo Privado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50861 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    pm.test(\"TC-50862 Validar la imagen cargada en el put request anterior\", function () {",
+									"        let content = pm.response.headers.get(\"Content-Disposition\");",
+									"        let loc = content.includes(pm.environment.get(\"locationPNG\"));",
+									"        pm.expect(loc).to.eql(true);",
+									"    });",
+									"",
+									"",
+									"",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Files/68/{{locationPNG}}?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Files",
+								"68",
+								"{{locationPNG}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Public Files",
+			"item": [
+				{
+					"name": "Put - Guardar Archivo Publico",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50863 Validar Status Code 202 Accepted\", function () {",
+									"    pm.response.to.have.status(202);",
+									"});",
+									"",
+									"if(pm.response.status == \"Accepted\") {",
+									"    pm.test(\"TC-53580 Validar en Header se muestre el Location\", function () {",
+									"        pm.response.to.have.header(\"Location\");",
+									"        pm.environment.set(\"locationPDF\", pm.response.headers.get(\"Location\"));",
+									"    });",
+									"",
+									"",
+									"",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "./APIArchivo/Ejemplo.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/PublicFiles?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"PublicFiles"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put - Guardar Archivo Publico No File Fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50864 Validar Status Code 400 Bad Request cuando no se adjunte archivo\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/PublicFiles?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"PublicFiles"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put - Guardar Archivo Publico Invalid Ext Fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50871 Validar Status Code 400 Bad Request adjuntando archivo con extension no válida\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "./APIArchivo/FAilEjemplo.pd.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/PublicFiles?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"PublicFiles"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - Obtener Public Files",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50868 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    pm.test(\"TC-50870 Validar Request con el archivo publicado\", function () {",
+									"        let content = pm.response.headers.get(\"Content-Disposition\");",
+									"        let loc = content.includes(pm.environment.get(\"locationPDF\"));",
+									"        pm.expect(loc).to.eql(true);",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/PublicFiles/{{locationPDF}}?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"PublicFiles",
+								"{{locationPDF}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - Obtener Public Files Ruta Fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50869 Status Code 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/PublicFiles/{{locationPDF_fail}}?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"PublicFiles",
+								"{{locationPDF_fail}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete - Borrar Public File",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50872 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/PublicFiles/{{locationPDF}}?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"PublicFiles",
+								"{{locationPDF}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - Obtener Public Files Validar Archivo no Encontrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-53593 Validar Status Code 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/PublicFiles/{{locationPDF}}?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"PublicFiles",
+								"{{locationPDF}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete - Borrar Public File Not Found Fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50873 Status Code 404 Not Found cuando no se encuentre el archivo a eliminar\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/PublicFiles/{{locationPDF}}?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"PublicFiles",
+								"{{locationPDF}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - Obtener Extensions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-50874 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    pm.test(\"TC-50875 Validar  Body Response con las extensiones\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.eql([\"jpg\",\"png\",\"gif\",\"webp\",\"bmp\",\"jpeg\",\"svg\",\"pdf\",\"xlsx\",\"pptx\",\"zip\",\"html\",\"docx\",\"pfx\",\"x-pkcs12\"]);",
+									"    });",
+									"",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/PublicFiles/Extensions?api-version=1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"PublicFiles",
+								"Extensions"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var url = pm.environment.get(\"url\");",
+					"var client = pm.environment.get(\"clientId\");",
+					"var secret = pm.environment.get(\"secretId\");",
+					"",
+					"pm.sendRequest({",
+					"    url: url,",
+					"    method: 'POST',",
+					"    headers: {",
+					"        'Accept': 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded'",
+					"    },",
+					"    body: {",
+					"        mode: 'urlencoded',",
+					"        urlencoded: [",
+					"            {key: \"grant_type\", value: \"client_credentials\", disabled: false},",
+					"            {key: \"client_id\", value: client, disabled: false},",
+					"            {key: \"client_secret\", value: secret, disabled: false}",
+					"        ]",
+					"    }",
+					"}, function (err, res) {",
+					"    if (res.json().access_token !== \"\") {",
+					"        pm.environment.set(\"accessToken\", res.json().access_token);",
+					"    } else {",
+					"        console.log(err);",
+					"    }",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://qa-api-archivos.azurewebsites.net"
+		}
+	]
+}

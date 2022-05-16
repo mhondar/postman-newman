@@ -1,0 +1,3026 @@
+{
+	"info": {
+		"_postman_id": "fc69c49d-6ff5-4353-a29b-f561b9f01207",
+		"name": "API_MKP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Identificacion",
+			"item": [
+				{
+					"name": "/api/Identificacion/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"TC-51215 Validar Status Code 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.status == \"OK\") {\r",
+									"    let jsonData = pm.response.json();\r",
+									"\r",
+									"    pm.test(\"TC-54026 Validar Body Response el email\", function () {\r",
+									"        pm.expect(jsonData.email).to.be.a('string');\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"TC-54027 Validar Body Response el id\", function () {\r",
+									"        pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"UsernameId\")));\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"TC-54028 Validar Body Response la Suscripción\", function () {\r",
+									"        pm.expect(jsonData).to.have.property('suscripcion');\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"TC-54029 Validar Body Response el Access Token\", function () {\r",
+									"        pm.expect(jsonData).to.have.property('accesstoken').to.be.a('string');\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"TC-54030 Validar Body Response el Refresh Token\", function () {\r",
+									"        pm.expect(jsonData).to.have.property('refreshtoken').to.be.a('string');\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"TC-54031 Validar Body Response el Tokenpermisos\", function () {\r",
+									"        pm.expect(jsonData).to.have.property('tokenpermisos').to.be.a('string');\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"TC-54032 Validar Body Response el idSuscripción debe ser string\", function () {\r",
+									"        pm.expect(jsonData.suscripcion.id).to.be.a('string');\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{Username}}\",\n  \"password\": \"1234567\",\n  \"portalurl\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Identificacion/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Identificacion",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"reprehenderit\",\n    \"username\": \"vQuT8b6hFVfRw4@kkLArQutyVNovQgrdEIqkpAL.rf\",\n    \"portalurl\": \"nisi ea deserunt nostrud\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Identificacion/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Identificacion",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Identificacion/login Fail email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// validar email, id, suscripcion, accesstoken, refreshtoken, tokenpermisos, idsuscripcion debe ser string\r",
+									"\r",
+									"pm.test(\"TC-56450 Validar Status Code 401 Unauthorized\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"ivan.pinto@iconstruye.comm\",\n  \"password\": \"123456\",\n  \"portalurl\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Identificacion/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Identificacion",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"reprehenderit\",\n    \"username\": \"vQuT8b6hFVfRw4@kkLArQutyVNovQgrdEIqkpAL.rf\",\n    \"portalurl\": \"nisi ea deserunt nostrud\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Identificacion/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Identificacion",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Identificacion/checkuser/:username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"TC-51215 Validar Status Code 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.status == \"OK\") {\r",
+									"    let jsonData = pm.response.json();\r",
+									"\r",
+									"    pm.test(\"TC-56452 Validar Body Response retorne un Boolean\", function () {\r",
+									"        pm.expect(jsonData).to.be.a('boolean');\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Identificacion/checkuser/{{Username}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Identificacion",
+								"checkuser",
+								"{{Username}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Identificacion/checkuser/:username",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Identificacion",
+										"checkuser",
+										":username"
+									],
+									"variable": [
+										{
+											"key": "username"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Empresa",
+			"item": [
+				{
+					"name": "/api/Empresa/:suscripcionid/empresas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-51218 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"    let long = jsonData.length;    ",
+									"    for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-54071 Validar que los objetos contengan la property id, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"id\").to.be.a('number');",
+									"        }); ",
+									"        pm.test(\"TC-55834 Validar que los objetos contengan la property codigo, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"codigo\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55835 Validar que los objetos contengan la property nombre, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"nombre\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55836 Validar que los objetos contengan la property activo, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"activo\").to.be.a(\"boolean\");",
+									"        });",
+									"        pm.test(\"TC-55837 Validar que los objetos contengan la property fechacreacion, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"fechacreacion\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55838 Validar que los objetos contengan la property porcentajecompletitud, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"porcentajecompletitud\").to.be.a(\"number\");",
+									"        });",
+									"    }",
+									"",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "ivan.pinto@iconstruye.com"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Empresa/{{suscripcionid}}/empresas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Empresa",
+								"{{suscripcionid}}",
+								"empresas"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Empresa/:suscripcionid/empresas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Empresa",
+										":suscripcionid",
+										"empresas"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Empresa/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// validar id no sea vacio y numerico",
+									"",
+									"pm.test(\"TC-51217 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"",
+									"    pm.test(\"TC-54072 Validar que el body request contengan la property id y numérico\", function () {",
+									"        pm.expect(jsonData).to.have.property(\"id\").to.be.a('number');",
+									"    }); ",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Empresa/{{idEmpresa}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Empresa",
+								"{{idEmpresa}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Empresa/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Empresa",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Indicadores/{suscripcionid}",
+			"item": [
+				{
+					"name": "/api/Indicadores/:suscripcionid/cantidaddocumentosporestado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// validar status 200 o 204\r",
+									"\r",
+									"pm.test(\"TC-51212 Validar Status Code 200 OK ó 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204])\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Indicadores/{{suscripcionid}}/cantidaddocumentosporestado",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Indicadores",
+								"{{suscripcionid}}",
+								"cantidaddocumentosporestado"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Indicadores/:suscripcionid/cantidaddocumentosporestado",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Indicadores",
+										":suscripcionid",
+										"cantidaddocumentosporestado"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Indicadores/:suscripcionid/ultimascotizaciones",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// validar 200 o 204\r",
+									"\r",
+									"pm.test(\"TC-51211 Validar Status Code 204 OK\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204])\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Indicadores/{{suscripcionid}}/ultimascotizaciones",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Indicadores",
+								"{{suscripcionid}}",
+								"ultimascotizaciones"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Indicadores/:suscripcionid/ultimascotizaciones",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Indicadores",
+										":suscripcionid",
+										"ultimascotizaciones"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Indicadores/:suscripcionid/resumenventasporcliente/:fechainicial/:fechafinal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"TC-54762 Validar Status Code 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.status == \"OK\") {\r",
+									"    var jsonData = pm.response.json();\r",
+									"  \r",
+									"    pm.test(\"TC-54763 Validar properties Top\", function () {\r",
+									"        pm.expect(jsonData).to.have.property(\"Top\");  \r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"TC-54764 Validar properties Ventas\", function () {\r",
+									"        pm.expect(jsonData).to.have.property(\"Ventas\");\r",
+									"    });\r",
+									"\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "cupidatat cillum id"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Indicadores/{{suscripcionid}}/resumenventasporcliente/:fechainicial/:fechafinal/:top",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Indicadores",
+								"{{suscripcionid}}",
+								"resumenventasporcliente",
+								":fechainicial",
+								":fechafinal",
+								":top"
+							],
+							"variable": [
+								{
+									"key": "fechainicial",
+									"value": "2021-11-01T00:00:00.001Z"
+								},
+								{
+									"key": "fechafinal",
+									"value": "2021-11-30T23:59:59.999Z"
+								},
+								{
+									"key": "top",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Indicadores/:suscripcionid/resumenventasporcliente/:fechainicial/:fechafinal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Indicadores",
+										":suscripcionid",
+										"resumenventasporcliente",
+										":fechainicial",
+										":fechafinal"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										},
+										{
+											"key": "fechainicial"
+										},
+										{
+											"key": "fechafinal"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Indicadores/:suscripcionid/monitorobras",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Validar codigo 200 y nodos indicadores e imágenes data en duro\r",
+									"\r",
+									"pm.test(\"TC-51209 Validar Status Code 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.status == \"OK\") {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    pm.test(\"TC-54765 Validar indicadores\", function () {\r",
+									"        pm.expect(jsonData).to.have.property(\"indicadores\");\r",
+									"    });\r",
+									"\r",
+									"    if(pm.expect(jsonData).to.have.property(\"indicadores\")){\r",
+									"        let longIndicadores= jsonData.indicadores.length;   \r",
+									"        for(let i=0; i<longIndicadores; i++) {\r",
+									"            pm.test(\"TC-54766 Validar que los objetos de indicadores contengan la property codigo, objeto \" + i, function () {\r",
+									"                pm.expect(jsonData.indicadores[i]).to.have.property(\"codigo\").to.be.a(\"string\");\r",
+									"            });\r",
+									"            pm.test(\"TC-55871 Validar que los objetos de indicadores contengan la property cantidad, objeto \" + i, function () {\r",
+									"                pm.expect(jsonData.indicadores[i]).to.have.property(\"cantidad\").to.be.a(\"number\");\r",
+									"            });\r",
+									"        }\r",
+									"\r",
+									"        pm.test(\"TC-55868 Validar imagenes\", function () {\r",
+									"            pm.expect(jsonData).to.have.property(\"imagenes\");\r",
+									"        });\r",
+									"        if(pm.expect(jsonData).to.have.property(\"imagenes\")){\r",
+									"            let longImagenes= jsonData.imagenes.length;\r",
+									"            for(let i=0; i<longImagenes; i++) {\r",
+									"                pm.test(\"TC-55869 Validar que los objetos de imagenes contengan la property url, objeto \" + i), function () {\r",
+									"                    pm.expect(jsonData.imagenes[i]).to.have.property(\"url\").to.be.a(\"string\");\r",
+									"                };\r",
+									"                pm.test(\"TC-55870 Validar que los objetos de imagenes contengan la property nombre_obra, objeto \" + i), function () {\r",
+									"                    pm.expect(jsonData.imagenes[i]).to.have.property(\"nombre_obra\").to.be.a(\"string\");\r",
+									"                };\r",
+									"            }\r",
+									"\r",
+									"        }\r",
+									"    }\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Indicadores/{{suscripcionid}}/monitorobras",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Indicadores",
+								"{{suscripcionid}}",
+								"monitorobras"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Indicadores/:suscripcionid/monitorobras",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Indicadores",
+										":suscripcionid",
+										"monitorobras"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Indicadores/:suscripcionid/tiemporespuestaproveedor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// validar 200 y al menos un arreglo con al menos un elemento con rut o tiempo de respuesta.\r",
+									"\r",
+									"pm.test(\"TC-54767 Validar Status Code 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"// Mejorar con un for\r",
+									"if(pm.response.status == \"OK\") {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    let long= jsonData.length;   \r",
+									"    for(let i=0; i<long; i++) {\r",
+									"        pm.test(\"TC-54768 Validar que el arreglo traiga un rut\", function () {\r",
+									"            pm.expect(jsonData[i]).to.have.property(\"rut\").to.be.a(\"string\");\r",
+									"        });\r",
+									"        pm.test(\"TC-55597 Validar que el arreglo traiga tiemporespuesta\", function () {\r",
+									"            pm.expect(jsonData[i]).to.have.property(\"tiemporespuesta\").to.be.a(\"number\");\r",
+									"        });\r",
+									"    }\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Indicadores/{{suscripcionid}}/tiemporespuestaproveedor",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Indicadores",
+								"{{suscripcionid}}",
+								"tiemporespuestaproveedor"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Indicadores/:suscripcionid/tiemporespuestaproveedor",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Indicadores",
+										":suscripcionid",
+										"tiemporespuestaproveedor"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Menu/{suscripcionid}",
+			"item": [
+				{
+					"name": "/api/Menu/:suscripcionid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-51207 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"    let long = jsonData.length;    ",
+									"    for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-55004 Validar que los objetos contengan la property id, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"id\");",
+									"        }); ",
+									"        pm.test(\"TC-55005 Validar que los objetos contengan la property nivel, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"nivel\").to.be.a(\"number\");",
+									"        });",
+									"        pm.test(\"TC-55006 Validar que los objetos contengan la property codigo, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"codigo\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55007 Validar que los objetos contengan la property nombre, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"nombre\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55008 Validar que los objetos contengan la property descripción, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"descripcion\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55009 Validar que los objetos contengan la property esescritorio, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"esescritorio\").to.be.a(\"boolean\");",
+									"        });",
+									"        pm.test(\"TC-55010 Validar que los objetos contengan la property postpage, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"postpage\");",
+									"        });",
+									"        pm.test(\"TC-55011 Validar que los objetos contengan la property url, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"url\");",
+									"        });",
+									"        pm.test(\"TC-55012 Validar que los objetos contengan la property submenu, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"submenu\");",
+									"        });",
+									"    }",
+									"",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Menu/{{suscripcionid}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Menu",
+								"{{suscripcionid}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Menu/:suscripcionid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Menu",
+										":suscripcionid"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Menu/:suscripcionid/favoritos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"TC-51208 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"    let long = jsonData.length;",
+									"    ",
+									"    pm.test(\"TC-55017 Validar que contenga un array con al menos un objeto\", function () {",
+									"        pm.expect(long).to.be.greaterThan(0);",
+									"    });",
+									"    ",
+									"    for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-55018 Validar que los objetos contengan la property id, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"id\");",
+									"        }); ",
+									"        pm.test(\"TC-55019 Validar que los objetos contengan la property nivel, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"nivel\").to.be.a(\"number\");",
+									"        });",
+									"        pm.test(\"TC-55020 Validar que los objetos contengan la property codigo, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"codigo\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55021 Validar que los objetos contengan la property nombre, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"nombre\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55022 Validar que los objetos contengan la property descripción, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"descripcion\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55023 Validar que los objetos contengan la property esescritorio, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"esescritorio\").to.be.a(\"boolean\");    ",
+									"        });   ",
+									"        pm.test(\"TC-55024 Validar que los objetos contengan la property postpage, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"postpage\");",
+									"        });",
+									"        pm.test(\"TC-55025 Validar que los objetos contengan la property url, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"url\");",
+									"        });",
+									"        pm.test(\"TC-55026 Validar que los objetos contengan la property submenu, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"submenu\");",
+									"        });",
+									"        pm.test(\"TC-55027 Validar que los objetos contengan la property posicionmenu, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"posicionmenu\").to.be.a(\"number\");",
+									"        });",
+									"",
+									"    }",
+									"",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Menu/{{suscripcionid}}/favoritos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Menu",
+								"{{suscripcionid}}",
+								"favoritos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Menu/:suscripcionid/favoritos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Menu",
+										":suscripcionid",
+										"favoritos"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Suscripcion",
+			"item": [
+				{
+					"name": "/api/Suscripcion/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"TC-51201 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"",
+									"     pm.test(\"TC-55925 Validar que el body response los objetos contengan la property 'id' y sea String\", function () {",
+									"            pm.expect(jsonData).to.have.property(\"id\").to.be.a(\"String\");",
+									"     });",
+									"",
+									"    pm.test(\"TC-55926 Validar que el body response los objetos contengan la property 'id'\", function () {",
+									"        pm.expect(jsonData).to.have.property(\"id\").to.eql(pm.environment.get(\"suscripcionid\"));",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/* Validar codigo 200",
+									"    Que contenga id con el dato guardado en subscripciónId que siempre sea String",
+									"*/",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Suscripcion/{{suscripcionid}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Suscripcion",
+								"{{suscripcionid}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Suscripcion/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Suscripcion",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Suscripcion/:id/productos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"TC-51202 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"",
+									"     pm.test(\"TC-55928 Validar que el body response los objetos contengan la property 'id' y sea String\", function () {",
+									"            pm.expect(jsonData).to.have.property(\"id\").to.be.a(\"String\");",
+									"     });",
+									"",
+									"    pm.test(\"TC-55929 Validar que el body response los objetos contengan la property 'id'\", function () {",
+									"        pm.expect(jsonData).to.have.property(\"id\").to.eql(pm.environment.get(\"suscripcionid\"));",
+									"    });",
+									"    pm.test(\"TC-55930 Validar que el body response los objetos contengan la property 'productos'\", function () {",
+									"        pm.expect(jsonData).to.have.property(\"productos\");",
+									"        ",
+									"    });",
+									"    let long = jsonData.productos.length;",
+									"    ",
+									"    pm.test(\"TC-55931 Validar al menos 1 objeto\", function () {",
+									"        pm.expect(long>0)",
+									"    });",
+									"    for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-55932 Validar que el body response los objetos contengan la property 'codigoproducto', objeto nº  \" + i, function () {",
+									"            pm.expect(jsonData.productos[i]).to.have.property(\"codigoproducto\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55933 Validar que el body response los objetos contengan la property 'nombreproducto', objeto nº  \" + i, function () {",
+									"            pm.expect(jsonData.productos[i]).to.have.property(\"nombreproducto\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55934 Validar que el body response los objetos contengan la property 'nombreproductoversion', objeto nº  \" + i, function () {",
+									"            pm.expect(jsonData.productos[i]).to.have.property(\"nombreproductoversion\").to.be.a(\"string\");",
+									"        });",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/* Codig 200",
+									"",
+									"Subscripcion id contenga String",
+									"Arreglo Productos con objetos al menos 1 ",
+									"*/",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Suscripcion/{{suscripcionid}}/productos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Suscripcion",
+								"{{suscripcionid}}",
+								"productos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Suscripcion/:id/productos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Suscripcion",
+										":id",
+										"productos"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Suscripcion/:id/dominiospermitidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//revisar despues y confirmar el codigo",
+									"",
+									"pm.test(\"TC-51203 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/*",
+									"Codigo 200 0 204",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Suscripcion/{{suscripcionid}}/dominiospermitidos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Suscripcion",
+								"{{suscripcionid}}",
+								"dominiospermitidos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Suscripcion/:id/dominiospermitidos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Suscripcion",
+										":id",
+										"dominiospermitidos"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Suscripcion/:id/historial",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"TC-51204 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"    let long = jsonData.length;",
+									"",
+									"",
+									"    pm.test(\"TC-55936 Validar al menos 1 objeto\", function () {",
+									"        pm.expect(long>0)",
+									"    });",
+									"",
+									"    for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-55937 Validar que los objetos contengan la property 'id', objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"fecha\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55938 Validar que los objetos contengan la property 'nivel', objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"nombreusuario\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55939 Validar que los objetos contengan la property 'codigo', objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"email\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55940 Validar que los objetos contengan la property 'nombre', objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"accionejecutada\").to.be.a(\"string\");",
+									"        });",
+									"",
+									"    }",
+									"",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/*",
+									"    Codigo 200 y estructura de al menos ubjeto con los siguientes nodos",
+									"",
+									"     \"fecha\": \"2021-08-31T16:40:30.796218+00:00\",",
+									"        \"nombreusuario\": \"Juanito Juanetes\",",
+									"        \"email\": \"molly69r_b895y@fuluj.com\",",
+									"        \"accionejecutada\": \"Usuario 'ivan.pinto@iconstruye.com' - Se ha activado\"",
+									"*/",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Suscripcion/{{suscripcionid}}/historial",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Suscripcion",
+								"{{suscripcionid}}",
+								"historial"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Suscripcion/:id/historial",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Suscripcion",
+										":id",
+										"historial"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Suscripcion/:id/configuracionwidget",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"TC-55961 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"    let long = jsonData.length;",
+									"",
+									"",
+									"    pm.test(\"TC-55962 Validar al menos 1 objeto\", function () {",
+									"        pm.expect(long>0)",
+									"    });",
+									"",
+									"",
+									"",
+									"    for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-55963 Validar que los objetos contengan la property id, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"widgetid\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55964 Validar que los objetos contengan la property nivel, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"show\").to.be.a(\"boolean\");",
+									"        });",
+									"        pm.test(\"TC-55965 Validar que los objetos contengan la property codigo, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"blurred\").to.be.a(\"boolean\");",
+									"        });",
+									"        pm.test(\"TC-55966 Validar que los objetos contengan la property nombre, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"urlbutton\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55967 Validar que los objetos contengan la property nombre, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"onlyproduct\");",
+									"        });",
+									"",
+									"    }",
+									"",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/*",
+									"    Codigo 200",
+									"",
+									"    validar arreglo con al menos un objeto con la estructura ",
+									"",
+									"     \"widgetid\": \"accesosdirectos\",",
+									"        \"show\": true,",
+									"        \"blurred\": false,",
+									"        \"urlbutton\": \"\",",
+									"        \"onlyproduct\": null",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Suscripcion/{{suscripcionid}}/configuracionwidget",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Suscripcion",
+								"{{suscripcionid}}",
+								"configuracionwidget"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Suscripcion/:id/configuracionwidget",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Suscripcion",
+										":id",
+										"configuracionwidget"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Suscripcion/usuariosuscripciones",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"TC-51205 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"    let long1 = jsonData.length;",
+									"",
+									"",
+									"    pm.test(\"TC-55942 Validar al menos 1 objeto\", function () {",
+									"        pm.expect(long1>0)",
+									"    });",
+									"",
+									"",
+									"    ",
+									"    for(let i=0; i<long1; i++) {",
+									"",
+									"        pm.test(\"TC-55943 Validar que el body response los objetos contengan la property id, objeto \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"id\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55944 Validar que los objetos contengan la property nombre \"+ i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"nombre\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55945 Validar que los objetos contengan la property administrador \"+ i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"administrador\").to.be.a(\"boolean\"); ",
+									"        });",
+									"        pm.test(\"TC-55946 Validar que los objetos contengan la property admincartera \"+ i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"admincartera\").to.be.a(\"boolean\"); ",
+									"        });",
+									"        pm.test(\"TC-55947 Validar que los objetos contengan la property empresas \"+ i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"empresas\");",
+									"        });",
+									"    ",
+									"        let long2 = jsonData[i].empresas.length;",
+									"",
+									"            pm.test(\"TC-55948 Validar al menos 1 objeto en la property empresas\", function () {",
+									"                pm.expect(long2>0)",
+									"            });",
+									"",
+									"        for(let j=0; j<long2; j++) {",
+									"            pm.test(\"TC-55949 Validar que los objetos contengan la property number, objeto \" + j, function () {",
+									"                pm.expect(jsonData[i].empresas[j]).to.have.property(\"id\").to.be.a(\"number\");",
+									"            });",
+									"            pm.test(\"TC-55950 Validar que los objetos contengan la property codigo, objeto \" + j, function () {",
+									"                pm.expect(jsonData[i].empresas[j]).to.have.property(\"codigo\").to.be.a(\"string\");",
+									"            });",
+									"            pm.test(\"TC-55951 Validar que los objetos contengan la property nombre, objeto \" + j, function () {",
+									"                pm.expect(jsonData[i].empresas[j]).to.have.property(\"nombre\").to.be.a(\"string\");",
+									"            });",
+									"            pm.test(\"TC-55952 Validar que los objetos contengan la property activo, objeto \" + j, function () {",
+									"                pm.expect(jsonData[i].empresas[j]).to.have.property(\"activo\").to.be.a(\"boolean\");",
+									"            });",
+									"            pm.test(\"TC-55953 Validar que los objetos contengan la property fechacreacion, objeto \" + j, function () {",
+									"                pm.expect(jsonData[i].empresas[j]).to.have.property(\"fechacreacion\").to.be.a(\"string\");",
+									"            });",
+									"            pm.test(\"TC-55954 Validar que los objetos contengan la property porcentajecompletitud, objeto \" + j, function () {",
+									"                pm.expect(jsonData[i].empresas[j]).to.have.property(\"porcentajecompletitud\").to.be.a(\"number\");",
+									"            });",
+									"        }",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/*",
+									"    Codigo 200",
+									"    idsuscripción con String y dato guardado",
+									"    Arreglo con al menos un objeto en el nodo empresas con estructura",
+									"",
+									"      \"id\": 256,",
+									"                \"codigo\": \"96566940-K\",",
+									"                \"nombre\": \"AGENCIAS UNIVERSALES S A\",",
+									"                \"activo\": true,",
+									"                \"fechacreacion\": \"2020-03-27T19:06:50.023655+00:00\",",
+									"                \"porcentajecompletitud\": 0",
+									"*/",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Suscripcion/usuariosuscripciones",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Suscripcion",
+								"usuariosuscripciones"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Suscripcion/usuariosuscripciones",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Suscripcion",
+										"usuariosuscripciones"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "/api/Usuario/:suscripcionid/usuarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Codigo 200",
+									" * ",
+									" * al menos un objeto con estructura   ",
+									" *      \"id\": 81,",
+									"        \"email\": \"ivan.pinto@iconstruye.com\",",
+									"        \"telefono\": \"+56997505957\",",
+									"        \"activo\": true,",
+									"        \"fechaultimologin\": \"2021-10-26T14:22:46.263688+00:00\",",
+									"        \"federada\": false,",
+									"        \"nombres\": \"Camila\",",
+									"        \"apellidos\": \"Hormazabal\",",
+									"        \"codigo\": \"18664005-5\" ",
+									" * ",
+									" */",
+									"",
+									"pm.test(\"TC-51199 Validar Status code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"let jsonData = pm.response.json();",
+									"let long = jsonData.length;",
+									"    for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-55325 Validar estructura y contenido de la property id \", function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"id\").to.be.a(\"number\");",
+									"        });",
+									"        pm.test(\"TC-55680 Validar estructura y contenido de la property email \", function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"email\").to.be.a(\"string\");",
+									"        });   ",
+									"        pm.test(\"TC-55681 Validar estructura property telefono \", function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"telefono\");",
+									"        });  ",
+									"        pm.test(\"TC-55682 Validar estructura property activo \", function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"activo\");",
+									"        }); ",
+									"        pm.test(\"TC-55683 Validar estructura property fechaultimologin \", function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"fechaultimologin\");",
+									"        });   ",
+									"        pm.test(\"TC-55684 Validar estructura property federada \", function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"federada\").to.be.a(\"boolean\");",
+									"        }); ",
+									"        pm.test(\"TC-55685 Validar estructura property nombres \", function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"nombres\");",
+									"        });   ",
+									"        pm.test(\"TC-55686 Validar estructura property apellidos \", function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"apellidos\");",
+									"        }); ",
+									"        pm.test(\"TC-55687 Validar estructura property codigo \", function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"codigo\");",
+									"        }); ",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Usuario/{{suscripcionid}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Usuario",
+								"{{suscripcionid}}",
+								"usuarios"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Usuario/:suscripcionid/usuarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Usuario",
+										":suscripcionid",
+										"usuarios"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Usuario/:suscripcionid/notificaciones",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * ",
+									" * Codigo 200",
+									" * ",
+									" * al menos un objeto en el arreglo con la estructura",
+									" * ",
+									" *   \"id\": 81,",
+									"        \"notificacion_producto_id\": 1,",
+									"        \"nombre_notificacion\": \"Pagos recibidos\",",
+									"        \"tipo_notificacion_id\": 1,",
+									"        \"nombre_producto\": \"Pagos recibidos\",",
+									"        \"activo\": true,",
+									"        \"fecha_actualizacion\": \"2021-10-25T19:50:56.593627+00:00\",",
+									"        \"descripcion\": \"Se publica diariamente el conjunto de pagos publicados que un cliente tuyo notifica\"",
+									" */",
+									"",
+									"",
+									"pm.test(\"TC-51196 Validar Status code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"if(pm.response.status == \"OK\") {",
+									"let jsonData = pm.response.json();",
+									"let long = jsonData.length;",
+									"    for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-55318 Validar contenido y estructura de la property Id\", function () {",
+									"            pm.expect(jsonData[0]).to.have.property(\"id\").to.be.a(\"number\");",
+									"        });",
+									"    }",
+									"}    "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Usuario/{{suscripcionid}}/notificaciones",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Usuario",
+								"{{suscripcionid}}",
+								"notificaciones"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Usuario/:suscripcionid/notificaciones",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Usuario",
+										":suscripcionid",
+										"notificaciones"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Usuario/:suscripcionid/avisos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * codigo 200 o 204. FALTA 204",
+									" */",
+									"",
+									"pm.test(\"TC-55571 Validra Status code 200\", function () {",
+									"   pm.expect(pm.response.code).to.be.oneOf([200, 204])",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Usuario/{{suscripcionid}}/avisos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Usuario",
+								"{{suscripcionid}}",
+								"avisos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Usuario/:suscripcionid/avisos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Usuario",
+										":suscripcionid",
+										"avisos"
+									],
+									"variable": [
+										{
+											"key": "suscripcionid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Usuario/short",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Guardar Id en UsernameId",
+									"",
+									"/**",
+									" * Validar Status 200 al menos 1 objeto y la estructura",
+									" * ",
+									" *  \"id\": 81,",
+									"    \"email\": \"ivan.pinto@iconstruye.com\",",
+									"    \"telefono\": \"+56997505957\",",
+									"    \"activo\": true,",
+									"    \"fechaultimologin\": \"2021-10-26T14:22:46.263688+00:00\",",
+									"    \"federada\": false,",
+									"    \"nombres\": \"Camila\",",
+									"    \"apellidos\": \"Hormazabal\",",
+									"    \"codigo\": \"18664005-5\"",
+									" * ",
+									" */",
+									"",
+									"pm.test(\"TC-51198 Validar Status code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"if(pm.response.status == \"OK\") {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"UsernameId\", jsonData.id);",
+									"    pm.test(\"TC-54877 Validar property y tipo de dato Id\", function () {",
+									"        pm.expect(jsonData).to.have.property(\"id\").to.be.a(\"number\");",
+									"    });",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Usuario/short",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Usuario",
+								"short"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Usuario/short",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Usuario",
+										"short"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Usuario/usuariomigrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Validar codigo 200",
+									" * ",
+									" * Validar String puede venir con data o sin data",
+									" */",
+									"",
+									"pm.test(\"TC- 55323 Validar Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"TC-55324 Validar en el body tipo de dato string\", function () {",
+									"    pm.expect(jsonData).to.be.a(\"string\");",
+									"});",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Usuario/usuariomigrado",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Usuario",
+								"usuariomigrado"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Usuario/usuariomigrado",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Usuario",
+										"usuariomigrado"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Usuario/:tourid/tour",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									" * Validar 200 contenido puede ser bool true o false",
+									" */",
+									"",
+									"pm.test(\"TC-55595 Validar Status code 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"if(pm.response.status == \"OK\") {",
+									"    var jsonData = pm.response.json();",
+									"    pm.test(\"TC-55596 Validar tipo de dato\", function () {",
+									"        pm.expect(jsonData).to.be.a(\"boolean\");",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Usuario/{{tourid}}/tour",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Usuario",
+								"{{tourid}}",
+								"tour"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Usuario/:tourid/tour",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Usuario",
+										":tourid",
+										"tour"
+									],
+									"variable": [
+										{
+											"key": "tourid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Encuesta",
+			"item": [
+				{
+					"name": "/api/Encuesta/:id/respondida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" /*** Validar 200 contenido puede ser bool true o false*/",
+									"",
+									" pm.test(\"TC-51216 Validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if (pm.response.status == \"OK\") {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    pm.test('TC-54988 Validar que la respuesta sea true o false', () => {",
+									"        pm.expect(jsonData).to.be.a(\"boolean\");",
+									"    });",
+									"} "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Encuesta/{{encuestaId}}/respondida",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Encuesta",
+								"{{encuestaId}}",
+								"respondida"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "username",
+										"value": "cupidatat cillum id"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Encuesta/:id/respondida",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Encuesta",
+										":id",
+										"respondida"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Notificacion",
+			"item": [
+				{
+					"name": "/api/Notificacion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"pm.test(\"TC-55897 Generar test para validar Status Code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.status == \"OK\") {",
+									"    let jsonData = pm.response.json();",
+									"    let long = jsonData.length;",
+									"",
+									"",
+									"    pm.test(\"TC-55898 Validar al menos 1 objeto\", function () {",
+									"        pm.expect(long>0)",
+									"    });",
+									"",
+									"",
+									"    for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-55899 Validar que el body response los objetos contengan la property 'id', objeto nº \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"id\").to.be.a(\"number\");",
+									"        });",
+									"        pm.test(\"TC-55900 Validar que el body response los objetos contengan la property 'nombre', objeto nº \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"nombre\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55901 Validar que el body response los objetos contengan la property 'tiponotificacion', objeto nº \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"tiponotificacion\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55902 Validar que el body response los objetos contengan la property 'descripcion', objeto nº \" + i, function () {",
+									"            pm.expect(jsonData[i]).to.have.property(\"descripcion\").to.be.a(\"string\");",
+									"        });",
+									"",
+									"    }",
+									"",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/**",
+									" * ",
+									" * Validar codigo 200 y al menos un objeto dentro del array con la siguiente estructura",
+									" * ",
+									" *      \"id\": 1,",
+									"        \"nombre\": \"Pagos recibidos\",",
+									"        \"tiponotificacion\": \"ICCorp.NewMarketPlace.AplicationCore.Domain.Entities.Tiponotificacion\",",
+									"        \"descripcion\": \"Se publica diariamente el conjunto de pagos publicados que un cliente tuyo notifica\"",
+									" */"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Notificacion",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Notificacion"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Notificacion",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Notificacion"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "SuscripcionID",
+			"item": [
+				{
+					"name": "/api/v1/suscripcion/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"/**",
+									"Codigo 200",
+									"",
+									"id de subscripcion debe venir con un String",
+									"Debe venir al menos una empresa en el array con la siguiente estructura",
+									"",
+									"   \"id\": 256,",
+									"    \"codigo\": \"96566940-K\",",
+									"    \"nombre\": \"AGENCIAS UNIVERSALES S A\",",
+									"    \"activo\": true,",
+									"    \"fechacreacion\": \"2020-03-27T19:06:50.023655+00:00\",",
+									"    \"porcentajecompletitud\": 0",
+									" */",
+									"",
+									"pm.test(\"TC-51200 Validar Status code 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"if(pm.response.status == \"OK\") {",
+									"    var jsonData = pm.response.json();",
+									"    pm.test(\"TC-55653 Validar que el id de suscripción es de tipo string\", function () {",
+									"        pm.expect(jsonData).to.have.property(\"id\").to.be.a(\"string\");",
+									"    });",
+									"     let long = jsonData.empresas.length;",
+									"     console.log(long);",
+									"     for(let i=0; i<long; i++) {",
+									"        pm.test(\"TC-55654 Validar estructura y contenido de la property id, objeto \" + i, function () {",
+									"            pm.expect(jsonData.empresas[i]).to.have.property(\"id\").to.be.a(\"number\");",
+									"        });",
+									"        pm.test(\"TC-55655 Validar estructura y contenido de la property codigo, objeto \" + i, function () {",
+									"            pm.expect(jsonData.empresas[i]).to.have.property(\"codigo\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55656 Validar estructura y contenido de la property nombre, objeto \" + i, function () {",
+									"            pm.expect(jsonData.empresas[i]).to.have.property(\"nombre\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55657 Validar estructura y contenido de la property activo, objeto \" + i, function () {",
+									"            pm.expect(jsonData.empresas[i]).to.have.property(\"activo\").to.be.a(\"boolean\");",
+									"        });",
+									"        pm.test(\"TC-55658 Validar estructura y contenido de la property fechacreacion, objeto \" + i, function () {",
+									"            pm.expect(jsonData.empresas[i]).to.have.property(\"fechacreacion\").to.be.a(\"string\");",
+									"        });",
+									"        pm.test(\"TC-55659 Validar estructura y contenido de la property porcentajecompletitud, objeto \" + i, function () {",
+									"            pm.expect(jsonData.empresas[i]).to.have.property(\"porcentajecompletitud\").to.be.a(\"number\");",
+									"        });",
+									"    }",
+									"}",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "Basic dXNlcjpQYXNzd29yZEAxMjM=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/suscripcion/{{suscripcionid}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"suscripcion",
+								"{{suscripcionid}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/suscripcion/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"suscripcion",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://qa-api-nmp-core.azurewebsites.net"
+		}
+	]
+}
